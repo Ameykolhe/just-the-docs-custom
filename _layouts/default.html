@@ -44,33 +44,33 @@ layout: table_wrappers
     {% include components/mermaid.html %}
   {% endif %}
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
-    <script>
-        const correctCodeWord = "dd79dbee6b5c9146dae12e82cd98e45da482d0d2";
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
+  <script>
+      const correctCodeWord = "dd79dbee6b5c9146dae12e82cd98e45da482d0d2";
 
-        function checkCodeWord() {
-            let storedCodeWord = localStorage.getItem("hashedCodeWord");
-            if (storedCodeWord === correctCodeWord) {
-                document.getElementById("content").style.display = "block";
-            } else {
-                promptForCodeWord();
-            }
-        }
+      function checkCodeWord() {
+          let storedCodeWord = sessionStorage.getItem("hashedCodeWord");
+          if (storedCodeWord === correctCodeWord) {
+              document.getElementById("content").style.display = "block";
+          } else {
+              promptForCodeWord();
+          }
+      }
 
-        function promptForCodeWord() {
-            let userCodeWord = prompt("Please enter the code word:");
-            let hashedCodeWord = sha1(userCodeWord)
-            if (hashedCodeWord === correctCodeWord) {
-                localStorage.setItem("hashedCodeWord", hashedCodeWord);
-                document.getElementById("content").style.display = "block";
-            } else {
-                alert("Incorrect code word. Please try again.");
-                promptForCodeWord();
-            }
-        }
+      function promptForCodeWord() {
+          let userCodeWord = prompt("Please enter the code word:");
+          let hashedCodeWord = sha1(userCodeWord);
+          if (hashedCodeWord === correctCodeWord) {
+              sessionStorage.setItem("hashedCodeWord", hashedCodeWord);
+              document.getElementById("content").style.display = "block";
+          } else {
+              alert("Incorrect code word. Please try again.");
+              promptForCodeWord();
+          }
+      }
 
-        window.onload = checkCodeWord;
-    </script>
+      window.onload = checkCodeWord;
+  </script>
 
 </body>
 </html>
